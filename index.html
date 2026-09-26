@@ -1,0 +1,233 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mangeli Electricals</title>
+    <a href="img/1782211085820.jpg"></a>
+    <link rel="stylesheet" href="main.css" />
+  </head>
+
+  <body>
+    <nav>
+      <a href="aboutmang.html">About Us</a>
+      <a href="services.html">Services</a>
+      <a
+          class="social-link phone-link"
+          href="tel:+254722110178"
+          aria-label="Call Kasolongo Primary School"
+          title="Call Kasolongo Primary School"
+        >
+          <span class="phone-icon" aria-hidden="true">☎</span>
+          <span>Phone</span>
+        </a>
+    </nav>
+    <header class="school-intro">
+      <p class="eyebrow">Welcome to</p>
+      <h1>Mangeli Electricals Company</h1>
+      <div class="school-values">
+        <section>
+          <h2>Our Motto</h2>
+          <p>For My God, For My Country, For My People.</p>
+        </section>
+        <section>
+          <h2>Our Vision</h2>
+          <p>
+            Serving the community better through provision of the best services.
+          </p>
+        </section>
+        <section>
+          <h2>Our Mission</h2>
+          <p>Create a green and safe electrical environment</p>
+        </section>
+      </div>
+    </header>
+    <section class="foreword" aria-labelledby="foreword-heading">
+      <p class="eyebrow">A message from the company leadership</p>
+      <h2 id="foreword-heading">Message from the CEO</h2>
+
+      <article class="foreword-message">
+        <figure>
+          <img
+            src="img/1782211085820.jpg"
+            alt="The CEO"
+            width="200"
+            height="200"
+          />
+          <figcaption>The CEO</figcaption>
+        </figure>
+        <div>
+            <p>"The role of electricity can never be overstated.
+                <br>Equally, provision of safe electrical environment calls for qualified personell.
+                <br>Mangeli electrical company brings to you a contigent of very qualified personell, to serve you.
+                <br>We also respect our customers; feel free to get in touch concerning any issue.
+                <br><b>MAY GOD BLESS YOU."</b>
+            </p>
+        </div>
+
+
+      <p><b>Follow us on social media:</b></p>
+      <p>
+      <div class="social-links">
+        <a
+          class="social-link x-link"
+          href="https://x.com/evansmangeli"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit Evans Mangeli on X"
+          title="Visit Evans Mangeli on X"
+        >
+          <span class="x-icon" aria-hidden="true">𝕏</span>
+        </a>
+        <a
+          class="social-link instagram-link"
+          href="https://instagram.com/evansmangeli"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Visit Evans Mangeli on Instagram"
+          title="Visit Evans Mangeli on Instagram"
+        >
+          <span class="instagram-icon" aria-hidden="true">◎</span>
+          <span>Instagram</span>
+        </a>
+        <a
+          class="social-link whatsapp-link"
+          href="https://wa.me/254722110178"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contact us on WhatsApp"
+          title="Contact us on WhatsApp"
+        >
+          <span class="whatsapp-icon" aria-hidden="true">◔</span>
+          <span>WhatsApp</span>
+        </a>
+      </div>
+      </p>
+
+    </section>
+    
+    <fieldset>
+      <legend>Contact Us</legend>
+      <p>
+        Tell us about your project or electrical problem, and we will help you
+        find the right solution.
+      </p>
+      <form id="contact-form">
+        <p>
+          <label for="FirstName">First Name:</label>
+          <input
+            type="text"
+            name="FirstName"
+            id="FirstName"
+            autocomplete="on"
+            required
+          />
+        </p>
+        <p>
+          <label for="LastName">Last Name:</label>
+          <input
+            type="text"
+            name="LastName"
+            id="LastName"
+            autocomplete="on"
+            required
+          />
+        </p>
+        <p>
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            autocomplete="on"
+            required
+          />
+        </p>
+        <p>
+          <label for="phone">Phone:</label>
+          <input
+            type="tel"
+            name="phone"
+            id="phone"
+            autocomplete="on"
+            required
+          />
+        </p>
+
+        <p>Leave your message:</p>
+        <textarea
+          name="message"
+          id="message"
+          cols="30"
+          rows="10"
+          placeholder="Type your message here"
+          required
+        ></textarea>
+
+        <p>
+          <button type="submit">Submit</button>
+          <button type="reset">Clear all</button>
+        </p>
+
+      </form>
+    
+
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script>
+      emailjs.init({
+        publicKey: "5r0ExdHKOOkdo80MV",
+      });
+
+      const contactForm = document.getElementById("contact-form");
+      const formStatus = document.getElementById("form-status");
+
+      contactForm.addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const firstName = document.getElementById("FirstName").value.trim();
+        const lastName = document.getElementById("LastName").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const phone = document.getElementById("phone").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        if (!firstName || !lastName || !email || !phone || !message) {
+          formStatus.textContent = "Please fill in all required fields.";
+          formStatus.style.color = "red";
+          return;
+        }
+
+        formStatus.textContent = "Sending your message...";
+        formStatus.style.color = "#333";
+
+        const templateParams = {
+          first_name: firstName,
+          last_name: lastName,
+          email: email,
+          phone: phone,
+          message: message,
+          subject: `New enquiry from ${firstName} ${lastName}`,
+          reply_to: email,
+        };
+
+        emailjs
+          .send("service_pvrmkau", "template_ctev5oi", templateParams)
+          .then(function () {
+            formStatus.textContent =
+              "Your message has been sent successfully. We will contact you soon.";
+            formStatus.style.color = "green";
+            contactForm.reset();
+          })
+          .catch(function (error) {
+            const emailJsMessage =
+              error && error.text ? error.text : "Unknown EmailJS error";
+            formStatus.textContent = "EmailJS error: " + emailJsMessage;
+            formStatus.style.color = "red";
+            console.error("EmailJS Error:", error);
+          });
+      });
+    </script>
+    </fieldset>
+  
+    <p>Copyright&copy; 2026 | Evans Mangeli</p>
+
+  </body>
+</html>
